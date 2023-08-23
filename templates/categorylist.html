@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<main class="content">
+    <div class="container">
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12">
+                        <div class="card card-success card-outline">
+                            <div class="card-header">
+                              <h3 class="card-title">
+                                ລາຍການສິນຄ້າ
+                              </h3>
+                            </div>
+                            <div class="card-body">
+                              
+                                      <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                        <tr>
+                                          <th>ລາຍການ</th>
+                                          <th>ຈັກການ</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for form in data %}
+                                        <tr>
+                                          <td>{{form.name}}</td>
+                                          <td>
+                                            <a href="detail/{{form.id}}"><button type="button" class="btn btn-outline-primary">ເບິງ</button></a> 
+                                            <a href="deletecate/{{form.id}}"><button type="button" class="btn btn-outline-danger">ລຶບ</button></a>
+                                          </td>
+                                        </tr>
+                                        {% endfor %}
+                                      </table>
+                        </div>
+            </div>
+        </div>
+    
+    </div>
+    </main>
+    
+{% endblock %}
+
+

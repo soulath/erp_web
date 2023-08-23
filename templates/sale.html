@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+  <main class="content">
+    <div class="container">
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12">
+                        <div class="card card-success card-outline">
+                            <div class="card-header">
+                              <h3 class="card-title">
+                                <i class="fas fa-shopping-cart"></i>
+                                ຂ່າຍສິນຄ້າ
+                              </h3>
+                            </div>
+                            <div class="card-body">
+                              <form method="POST"  enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ saleform|crispy }}
+                                <br>
+                                <input type="submit" value="ບັນທຶກ" class="btn btn-success swalDefaultSuccess"/>
+                            </form>
+
+                            <!-- /.card -->
+                        </div>
+            </div>
+        </div>
+    
+    </div>
+    </main>
+
+    <script type="text/javascript">
+        function sum() {
+            var available_quantity = document.getElementById('id_available_quantity').value;
+            var price = document.getElementById('id_price').value;
+            var result = parseInt(available_quantity) * parseInt(price);
+
+            if (!isNaN(result)) {
+                document.getElementById('txtResult').value = result;
+            }
+        }
+    </script>
+    
+    
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block content %}
+<main class="content">
+    <div class="container">
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12">
+                        <div class="card card-success card-outline">
+                            <div class="card-header">
+                              <h3 class="card-title">
+                                <i class="fas fa-shopping-cart"></i>
+                                ລາຍການສິນຄ້າ
+                              </h3>
+                            </div>
+                            <div class="card-body">
+                                      <table id="example1" class="table table-bordered table-striped">
+                                        <thead>
+                                        <tr>
+                                          <th>ລາຍການ</th>
+                                          <th>ປະເພດສິນຄ້າ</th>
+                                          <th>ລາຄາ</th>
+                                          <th>ຈຳນວນ</th>
+                                          <th>ຮູບພາບ</th>
+                                          <th>ຈັກການ</th>
+                                          <th>dd</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for form in data %}
+                                        <tr>
+                                          <td>{{form.sku}}</td>
+                                          <td>{{form.category}}</td>
+                                          <td>{{form.price|intcomma}}</td>
+                                          <td>{{form.available_quantity}}</td>
+                                          <td><img src="{{ form.image.url }}" weight="50" height="50"></td>
+
+                                          <td>
+                                            <a href="detail/{{form.id}}"><button type="button" class="btn btn-outline-primary">ເບິງ</button></a> <a href="delete/{{form.id}}"><button type="button" class="btn btn-outline-danger">ລຶບ</button></a>
+                                            <a href="edit/{{form.id}}"><button type="button" class="btn btn-outline-success">ແກ້ໄຂ</button></a>
+                                          </td>
+                                          <td>{{form.owner}}</td>
+                                        </tr>
+                                        {% endfor %}
+
+                                      </table>
+                        </div>
+            </div>
+        </div>
+    
+    </div>
+    </main>
+{% endblock %}
+
+
