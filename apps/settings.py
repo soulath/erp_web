@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'bootstrap5',
     'crispy_forms'
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -99,7 +98,7 @@ DATABASES = {
         #'PASSWORD': '',
         #'HOST': '127.0.0.1',
         #'PORT': '3306',
-    #}
+   # }
 #}
 
 
@@ -146,3 +145,4 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+#AUTH_USER_MODEL = 'erp.USER'

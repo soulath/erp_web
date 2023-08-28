@@ -4,17 +4,33 @@ from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import  login_required
 from django.contrib.auth.models import User
-from .models import Sold_product, Product, Category
-from .forms import AddCategoryForm, AddproductForm, AddsaleForm, RegisterForm, LoginForm
-
-import requests
+from .models import Sold_product, Product, Category, UserProfile
+from .forms import AddCategoryForm, AddproductForm, AddsaleForm, RegisterForm, LoginForm, UserProfileForm, Adduser, UserCreationForm
 import json
 # Create your views here.
 @login_required(login_url='login')
+def userprofile(request):
+    pro = UserProfile.objects.all()
+    return render(request, 'profile.html', {'prof': pro})
+@login_required(login_url='login')
+def edit_profile(request):
+    user_profile = get_object_or_404(UserProfile, user=request.user)
+    if request.method == 'GET':
+       form = UserProfileForm(instance=user_profile)
+       return render(request, 'editprofile.html', {'form':form}) 
+    elif request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'ອັບເດດprofileສຳເລັດ')
+            return redirect('profile')
+
+@login_required(login_url='login')
 def dasborad(request):
     total_product = Product.objects.count()
+    total_category = Category.objects.count()
     total_oder = Sold_product.objects.count()
-    return render(request, 'dashboard.html', {'tt_pro': total_product, 'tt_order': total_oder})
+    return render(request, 'dashboard.html', {'tt_pro': total_product, 'tt_order': total_oder, 'tt_cat': total_category})
 @login_required(login_url='/')
 def addproduct(request):
     if request.method == 'POST':
@@ -107,6 +123,7 @@ def saleproduct(request):
     else:
         form = AddsaleForm()
         return render(request, 'sale.html', {'saleform': form})
+    
 @login_required(login_url='/')    
 def salereport(requests):
     form = Sold_product.objects.all()
@@ -150,5 +167,6 @@ def sign_out(request):
     logout(request)
     messages.success(request,'ທ່ານ ໄດ້ອອກຈາກລະບົບແລ້ວ.')
     return redirect('/')  
+
 
 

@@ -96,7 +96,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+              <img src="{{user.userprofile.image.url}}" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   Brad Diesel
@@ -112,7 +112,7 @@
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
             <div class="media">
-              <img src="dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <img src="{{user.userprofile.image.url}}" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
                 <h3 class="dropdown-item-title">
                   John Pierce
@@ -200,10 +200,10 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{% static 'dist/img/user2-160x160.jpg'%}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{user.userprofile.image.url}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">ສະບາຍດີ: {{user.username}}</a>
+          <a href="{% url 'profile' %} " class="d-block">ສະບາຍດີ: {{user.username}}</a>
         </div>
       </div>
 
@@ -223,7 +223,6 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          <li class="nav-header">ຈັກການ</li>
 
           <li class="nav-item">
             <a href="{% url 'dasborad' %}" class="nav-link">
@@ -233,14 +232,13 @@
               </p>
             </a>
           </li>
-
-
+          <li class="nav-header">ຈັກການ</li>
           <li class="nav-item">
             <a href="{% url 'product' %}" class="nav-link">
               <i class="nav-icon fas fa-edit"></i>
               <p>
                 ເພີ່ມລາຍການ
-                <span class="badge badge-info right">2</span>
+
               </p>
             </a>
           </li>
@@ -260,11 +258,15 @@
               </p>
             </a>
           </li>
+
+
+
+          <li class="nav-header">ລາຍງານ</li>
           <li class="nav-item">
             <a href="{% url 'allproduct' %}" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
-                ສະແດ່ງລາຍການສິນຄ້າ
+                ສະແດງລາຍການສິນຄ້າ
               </p>
             </a>
           </li>
@@ -274,7 +276,7 @@
             <a href="{% url 'allcate' %}" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
-                ສະແດ່ງລາຍການປະເພດສິນຄ້າ
+                ສະແດງລາຍການປະເພດສິນຄ້າ
               </p>
             </a>
           </li>
@@ -283,38 +285,9 @@
             <a href="{% url 'salelist' %}" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
-                sale
+                ສະແດງການຂ່າຍ
               </p>
             </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-envelope"></i>
-              <p>
-                ລະບົບຈັດຊື້
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="pages/mailbox/mailbox.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inbox</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/mailbox/compose.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Compose</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="pages/mailbox/read-mail.html" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Read</p>
-                </a>
-              </li>
-            </ul>
           </li>
         
         </ul>

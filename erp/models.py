@@ -1,5 +1,22 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
+from django.db.models.signals import post_save
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    village = models.CharField(max_length=40, null=True)
+    province = models.CharField(max_length=40, null=True)
+    district = models.CharField(max_length=40, null=True)
+    mobile = models.CharField(max_length=12, null=True)
+    image = models.ImageField(upload_to="gallery", default='gallery/istockphoto-1224991426-612x612.jpg')
+    gender = models.CharField(max_length=2, choices=(('M','Male'),('F','female')), default=1)
+    bio = models.CharField(max_length=2000, null=True)
+    def create_profile(sender, **kwargs):
+         if kwargs['created']:
+              user_profile = UserProfile.objects.create(user=kwargs['instance'])
+    post_save.connect(create_profile, sender=User)
+
 
 # Create your models here.
 class Category(models.Model):
@@ -19,6 +36,7 @@ class Product(models.Model):
     def __str__(self):
 	    return self.sku
 
+
 class Sold_product(models.Model):
      product = models.ForeignKey(Product,on_delete=models.CASCADE)
      available_quantity = models.IntegerField(default=1)
@@ -28,7 +46,6 @@ class Sold_product(models.Model):
      created_at = models.DateTimeField(auto_now_add=True, null=True)
      def __str__(self):
 	     return self.product
- 
 
 
-     
+
