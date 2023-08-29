@@ -30,7 +30,8 @@ def dasborad(request):
     total_product = Product.objects.count()
     total_category = Category.objects.count()
     total_oder = Sold_product.objects.count()
-    return render(request, 'dashboard.html', {'tt_pro': total_product, 'tt_order': total_oder, 'tt_cat': total_category})
+    total_user = User.objects.count()
+    return render(request, 'dashboard.html', {'tt_pro': total_product, 'tt_order': total_oder, 'tt_cat': total_category, 'tt_user': total_user})
 @login_required(login_url='/')
 def addproduct(request):
     if request.method == 'POST':
