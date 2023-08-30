@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from .models import Category, Sold_product,Product, UserProfile
+from django.forms import formset_factory
 
 class AddproductForm(forms.ModelForm):
     sku = forms.CharField(widget=forms.TextInput(attrs={"class": "input","type": "text","placeholder": "SKU","class": "form-control",}), label="ຊື່ສິນຄ້າ")
@@ -20,7 +21,7 @@ class AddCategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = "__all__"
-        
+CategoryFormSet = formset_factory(AddCategoryForm, extra=2, max_num=10)
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
@@ -37,7 +38,9 @@ class AddsaleForm(forms.ModelForm):
     class Meta:
         model = Sold_product
         fields = ['product', 'available_quantity', 'price', 'total_price']
-    
+
+
+
 class RegisterForm(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={
           "class": "input",

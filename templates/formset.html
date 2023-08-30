@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<main class="content">
+    <div class="container">
+    <div class="container-fluid p-0">
+        
+        <div class="row">
+            <div class="col-12">
+                        <div class="card card-success card-outline">
+                            <div class="card-header">
+                              <h3 class="card-title">
+                                <i class="fas fa-edit"></i>
+                                ເພີ່ມປະເພດສິນຄ້າ
+                              </h3>
+                            </div>
+                            <div class="card-body">
+<form method="post">
+
+        {% csrf_token %}
+        {{ formset.as_p }}
+        <button type="submit">Save</button>
+</form>
+
+ 
+
+                            </div>
+                            <!-- /.card -->
+                        </div>
+            </div>
+        </div>
+    
+    </div>
+    </main>
+    
+{% endblock %}
+</div>
+

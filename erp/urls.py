@@ -10,6 +10,7 @@ urlpatterns = [
     path('delete/<int:id>', views.deleteproduct),
     path('detail/<int:id>', views.detail_view),
     path('allcate', views.showcategory, name='allcate'),
+    path('editcate/<int:id>', views.edit_cate),
     path('deletecate/<int:id>', views.deletecate),
     path('edit/<int:id>', views.edit_product),
     path('registerpage', views.register, name='registerpage'),
@@ -18,6 +19,7 @@ urlpatterns = [
     path('salelist', views.salereport, name='salelist'),
     path('profile', views.userprofile, name='profile'),
     path('editprofile', views.edit_profile, name='editprofile'),
+    path('formset', views.khaiy, name='formset'),
 
 
 

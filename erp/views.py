@@ -5,8 +5,16 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import  login_required
 from django.contrib.auth.models import User
 from .models import Sold_product, Product, Category, UserProfile
-from .forms import AddCategoryForm, AddproductForm, AddsaleForm, RegisterForm, LoginForm, UserProfileForm, Adduser, UserCreationForm
-import json
+from .forms import AddCategoryForm, AddproductForm, AddsaleForm, RegisterForm, LoginForm, UserProfileForm, Adduser, UserCreationForm, CategoryFormSet
+
+def khaiy(request):
+    if request.method == 'POST':
+        formset = AddCategoryForm(request.POST)
+        if formset.is_valid():
+            formset.save()
+    else:
+        formset = CategoryFormSet()
+    return render(request, 'formset.html', {'formset': formset})
 # Create your views here.
 @login_required(login_url='login')
 def userprofile(request):
@@ -27,11 +35,13 @@ def edit_profile(request):
 
 @login_required(login_url='login')
 def dasborad(request):
+    showdata = Product.objects.all()
     total_product = Product.objects.count()
     total_category = Category.objects.count()
     total_oder = Sold_product.objects.count()
     total_user = User.objects.count()
-    return render(request, 'dashboard.html', {'tt_pro': total_product, 'tt_order': total_oder, 'tt_cat': total_category, 'tt_user': total_user})
+    return render(request, 'dashboard.html', {'tt_pro': total_product, 'tt_order': total_oder, 'tt_cat': total_category, 'tt_user': total_user, 'data': showdata})
+
 @login_required(login_url='/')
 def addproduct(request):
     if request.method == 'POST':
@@ -88,6 +98,18 @@ def category(request):
         form = AddCategoryForm()
     return render(request, 'category.html', {'forms': form})
 
+@login_required(login_url='/')
+def edit_cate(request, id):
+    form = get_object_or_404(Category, id=id)
+    if request.method == 'GET':
+        form = {'form': AddCategoryForm(instance=form), 'id': id}
+        return render(request,'editcategory.html',form)   
+    elif request.method == 'POST':
+        form = AddCategoryForm(request.POST, request.FILES, instance=form)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'ອັບເດດສພເລັດ')
+            return redirect('category')
 
 @login_required(login_url='/')
 def showcategory(request):
